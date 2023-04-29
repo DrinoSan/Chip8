@@ -4,6 +4,8 @@
 
 constexpr unsigned int FONTSET_SIZE = 80;
 constexpr unsigned int FONTSET_START_ADDRESS = 0x50;
+constexpr unsigned int VIDEO_HEIGHT = 32;
+constexpr unsigned int VIDEO_WIDTH = 64;
 
 class Chip8 {
 
@@ -47,6 +49,7 @@ public:
 
   const unsigned int START_ADDRESS = 0x200;
   void loadROM(char const *filename);
+  void Cycle();
 
   // Check for ref: http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#00E0
   // OP Codes
@@ -64,4 +67,63 @@ public:
   void OP_8xy2();
   void OP_8xy3();
   void OP_8xy4();
+  void OP_8xy5();
+  void OP_8xy6();
+  void OP_8xy7();
+  void OP_8xyE();
+  void OP_9xy0();
+  void OP_Annn();
+  void OP_Bnnn();
+  void OP_Cxkk();
+  void OP_Dxyn();
+  void OP_Ex9E();
+  void OP_ExA1();
+  void OP_Fx07();
+  void OP_Fx0A();
+  void OP_Fx15();
+  void OP_Fx18();
+  void OP_Fx1E();
+  void OP_Fx29();
+  void OP_Fx33();
+  void OP_Fx55();
+  void OP_Fx65();
+
+
+
+
+void Table0() { ((*this).*(table0[opcode & 0x000Fu]))(); }
+
+void Table8() { ((*this).*(table8[opcode & 0x000Fu]))(); }
+
+void TableE() { ((*this).*(tableE[opcode & 0x000Fu]))(); }
+
+void TableF() { ((*this).*(tableF[opcode & 0x00FFu]))(); }
+
+void OP_NULL() {}
+
+typedef void (Chip8::*Chip8Func)();
+Chip8Func table[0xF + 1];
+Chip8Func table0[0xE + 1];
+Chip8Func table8[0xE + 1];
+Chip8Func tableE[0xE + 1];
+Chip8Func tableF[0x65 + 1];
+
+
+
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
