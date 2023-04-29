@@ -48,8 +48,20 @@ public:
   const unsigned int START_ADDRESS = 0x200;
   void loadROM(char const *filename);
 
-
+  // Check for ref: http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#00E0
   // OP Codes
   void OP_00E0();
   void OP_00EE();
+  void OP_1nnn();
+  void OP_2nnn();
+  void OP_3xkk();
+  void OP_4xkk();
+  void OP_5xy0();
+  void OP_6xkk();
+  void OP_7xkk();
+  void OP_8xy0();
+  void OP_8xy1();
+  void OP_8xy2();
+  void OP_8xy3();
+  void OP_8xy4();
 };
